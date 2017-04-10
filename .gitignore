@@ -6,5 +6,5 @@
 
 # Folder to not ignore
 !/app/
-!/build/
+!/docs/
 !/img/
