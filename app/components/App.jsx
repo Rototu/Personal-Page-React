@@ -3,7 +3,7 @@ const ReactDOM = require( 'react-dom' );
 const SectionDivBoxes = require( './Boxes.jsx' );
 const Loader = require( './Loader.jsx' );
 
-let title = `   EMANUEL FARAUANU <br/> Programmer & Volunteer`;
+let title = `EMANUEL FARAUANU <br/> Programmer & Volunteer`;
 
 const ContentBox = React.createClass( {
 
@@ -105,7 +105,7 @@ const ParallaxDiv = React.createClass( {
          lineHeight: '30px',
          fontSize: '28px',
          width: '100%',
-         fontFamily: 'Lucida Console',
+         fontFamily: '"Lucida Console", Monaco, monospace',
          fontWeight: 100,
          textAlign: 'center',
          display: 'inline-block',
@@ -155,7 +155,7 @@ const NavButton = React.createClass( {
          fontWeight: 400,
          height: 40,
          lineHeight: '40px',
-         fontFamily: 'Lucida Console',
+         fontFamily: '"Lucida Console", Monaco, monospace',
          transition: 'all 0.15s',
          color: this.state.txtColor
       };
@@ -181,9 +181,9 @@ const Nav = React.createClass( {
    },
 
    handleScroll( e ) {
-      if( e.pageY >= window.innerHeight + 50 ) {
+      if( e.pageY >= window.innerHeight + 10 ) {
          this.setState( {
-            top: window.innerHeight - e.pageY + 50,
+            top: window.innerHeight - e.pageY + 10,
          } );
       } else if( e.pageY >= window.innerHeight ) {
          this.setState( {
@@ -250,7 +250,8 @@ const App = React.createClass( {
 
       const style = {
          margin: 0,
-         width: '100%'
+         width: '100%',
+         fontFamily: '"Lucida Console", Monaco, monospace'
       };
 
       return (
@@ -268,3 +269,5 @@ const App = React.createClass( {
 } );
 
 module.exports = App;
+
+// ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(this).parentNode);

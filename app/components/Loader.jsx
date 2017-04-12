@@ -35,11 +35,11 @@ const Loader = React.createClass( {
          left: 'calc(50vw - 100px)',
          position: 'absolute',
          fontSize: 100,
-         fontFamily: 'Courier New'
+         fontFamily: '"Lucida Console", Monaco, monospace'
       };
 
       return (
-         <div style = { loaderStyle } >
+         <div style={ loaderStyle } >
             <LeftBrace highlight={this.state.highlight} />
             <RightBrace highlight={this.state.highlight} />
          </div>
@@ -70,7 +70,7 @@ const LeftBrace = React.createClass( {
          transition: 'all ' + loadIntervalTime + 's'
       };
 
-      return <div style = { leftBraceStyle } > { '{' } < /div>;
+      return <div style={ leftBraceStyle } > { '{' } < /div>;
 
    }
 
@@ -97,7 +97,7 @@ const RightBrace = React.createClass( {
          transition: 'all ' + loadIntervalTime + 's'
       };
 
-      return <div style = { rightBraceStyle } > { '}' } < /div>;
+      return <div style={ rightBraceStyle } > { '}' } < /div>;
 
    }
 
@@ -141,7 +141,7 @@ const App = React.createClass( {
          display: this.state.display
       };
 
-      return <div style = { screenStyle } > < Loader / > < /div>;
+      return <div style={ screenStyle } > < Loader / > < /div>;
 
    }
 
