@@ -38,21 +38,21 @@ const ParallaxDiv = React.createClass( {
    },
 
    handleScroll( e ) {
-      const domNode = ReactDOM.findDOMNode( this );
-      const elementTop = domNode.getBoundingClientRect().top;
-      let bgY = 0;
-      if( elementTop <= window.innerHeight ) {
-         bgY = - ( window.innerHeight - elementTop ) * 0.1;
-      }
-      this.setState( {
-         posTop: bgY
-      } );
+      // const domNode = ReactDOM.findDOMNode( this );
+      // const elementTop = domNode.getBoundingClientRect().top;
+      // let bgY = 0;
+      // if( elementTop <= window.innerHeight ) {
+      //    bgY = - elementTop;
+      // }
+      // this.setState( {
+      //    posTop: bgY
+      // } );
    },
 
    componentDidMount() {
 
-      window.addEventListener( 'scroll', this.handleScroll );
-      this.handleScroll();
+      // window.addEventListener( 'scroll', this.handleScroll );
+      // this.handleScroll();
 
       if( this.props.name === 'title' ) {
 
@@ -78,14 +78,14 @@ const ParallaxDiv = React.createClass( {
                   content: text
                } );
             }, 110 );
-         }, 7700);
+         }, 6000);
 
       }
 
    },
 
    componentWillUnmount() {
-      window.removeEventListener( 'scroll', this.handleScroll );
+      // window.removeEventListener( 'scroll', this.handleScroll );
    },
 
    render() {
@@ -95,9 +95,10 @@ const ParallaxDiv = React.createClass( {
          height: this.props.height,
          backgroundColor: 'black',
          backgroundImage: 'url("' + this.props.path + '")',
-         backgroundPosition: '0px ' + this.state.posTop + 'px',
-         backgroundSize: 'cover',
+         backgroundPosition: '100% 50%',
+         backgroundSize: 'auto 100%',
          backgroundRepeat: 'no-repeat',
+         backgroundAttachment: 'fixed',
          color: 'white'
       };
 
@@ -261,7 +262,7 @@ const App = React.createClass( {
             <ParallaxDiv name='title' path='../img/me.png' title={ title } height='100vh' />
             <SectionDivBoxes name='page1' height='100vh' >
             </SectionDivBoxes>
-            <ParallaxDiv name='page2' path='../img/me.png' title="Example" height='100vh' />
+            <ParallaxDiv name='page2' path='../img/code.png' title="Example" height='100vh' />
          </div>
       );
    }

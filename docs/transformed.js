@@ -10027,21 +10027,21 @@ const ParallaxDiv = React.createClass({
    },
 
    handleScroll(e) {
-      const domNode = ReactDOM.findDOMNode(this);
-      const elementTop = domNode.getBoundingClientRect().top;
-      let bgY = 0;
-      if (elementTop <= window.innerHeight) {
-         bgY = -(window.innerHeight - elementTop) * 0.1;
-      }
-      this.setState({
-         posTop: bgY
-      });
+      // const domNode = ReactDOM.findDOMNode( this );
+      // const elementTop = domNode.getBoundingClientRect().top;
+      // let bgY = 0;
+      // if( elementTop <= window.innerHeight ) {
+      //    bgY = - elementTop;
+      // }
+      // this.setState( {
+      //    posTop: bgY
+      // } );
    },
 
    componentDidMount() {
 
-      window.addEventListener('scroll', this.handleScroll);
-      this.handleScroll();
+      // window.addEventListener( 'scroll', this.handleScroll );
+      // this.handleScroll();
 
       if (this.props.name === 'title') {
 
@@ -10067,12 +10067,12 @@ const ParallaxDiv = React.createClass({
                   content: text
                });
             }, 110);
-         }, 7700);
+         }, 6000);
       }
    },
 
    componentWillUnmount() {
-      window.removeEventListener('scroll', this.handleScroll);
+      // window.removeEventListener( 'scroll', this.handleScroll );
    },
 
    render() {
@@ -10082,9 +10082,10 @@ const ParallaxDiv = React.createClass({
          height: this.props.height,
          backgroundColor: 'black',
          backgroundImage: 'url("' + this.props.path + '")',
-         backgroundPosition: '0px ' + this.state.posTop + 'px',
-         backgroundSize: 'cover',
+         backgroundPosition: '100% 50%',
+         backgroundSize: 'auto 100%',
          backgroundRepeat: 'no-repeat',
+         backgroundAttachment: 'fixed',
          color: 'white'
       };
 
@@ -10250,7 +10251,7 @@ const App = React.createClass({
          React.createElement(Nav, null),
          React.createElement(ParallaxDiv, { name: 'title', path: '../img/me.png', title: title, height: '100vh' }),
          React.createElement(SectionDivBoxes, { name: 'page1', height: '100vh' }),
-         React.createElement(ParallaxDiv, { name: 'page2', path: '../img/me.png', title: 'Example', height: '100vh' })
+         React.createElement(ParallaxDiv, { name: 'page2', path: '../img/code.png', title: 'Example', height: '100vh' })
       );
    }
 
@@ -10274,21 +10275,24 @@ const Box = React.createClass({
    getInitialState() {
       return {
          size: 100,
-         opacity: 0
+         opacity: 0,
+         bottom: '-21vw'
       };
    },
 
    mouseEnterHandler(e) {
       this.setState({
          size: 120,
-         opacity: 1
+         opacity: 1,
+         bottom: 0
       });
    },
 
    mouseLeaveHandler(e) {
       this.setState({
          size: 100,
-         opacity: 0
+         opacity: 0,
+         bottom: '-21vw'
       });
    },
 
@@ -10314,10 +10318,11 @@ const Box = React.createClass({
          opacity: this.state.opacity,
          width: '100%',
          height: '100%',
-         backgroundColor: 'rgba(0, 0, 0, 0.95)',
+         backgroundColor: 'rgba(0, 0, 0, 0.85)',
          transition: 'opacity 0.3s',
          textAlign: 'center',
-         position: 'relative'
+         position: 'relative',
+         overflow: 'hidden'
       };
 
       const textStyle = {
@@ -10325,11 +10330,12 @@ const Box = React.createClass({
          position: 'absolute',
          color: 'white',
          fontSize: 12,
-         bottom: 0,
+         bottom: this.state.bottom,
          left: 0,
          padding: 10,
          backgroundColor: 'black',
-         boxSizing: 'border-box'
+         boxSizing: 'border-box',
+         transition: 'all 0.3s'
       };
 
       return React.createElement(
@@ -10395,14 +10401,14 @@ const SectionDiv = React.createClass({
             path2 = '../img/Volunteer.png',
             path3 = '../img/philosoraptor.png';
       const text1 = `I am a JavaScript enthusiast, trying to build all my projects
-         with the minimal amount of external libraries, prefering to write as much code as
+         with the minimal amount of external libraries, preferring to write as much code as
          possible on my own.`;
-      const text2 = `Since a very young age I've been trying to learn physics, mathematics and programming.
-         Now I'm an undergraduate student at St. Anne's College in Oxford, studying Computer Science and
-         Philosophy.`;
-      const text3 = `In my free time I like spending my time by being in the middle of nature or
-         volunteering for projects that have a positive impact for those around, especially those focusing
-         on education.`;
+      const text2 = `Physics, Mathematics, Programming and Arts
+      are my main subjects of interest. Now I'm an undergraduate student at St. Anne's College
+      in Oxford, studying Computer Science and Philosophy.`;
+      const text3 = `I like spending my free time being in the middle of nature or
+         volunteering for projects that have a positive impact on society through
+         education or culture.`;
 
       return React.createElement(
          'div',
@@ -10563,7 +10569,7 @@ const App = React.createClass({
             this.setState({
                display: 'none'
             });
-         }, 3100);
+         }, 1600);
       }, loadIntervalTime * 7000);
    },
 
@@ -10576,7 +10582,7 @@ const App = React.createClass({
          position: 'fixed',
          zIndex: 100,
          opacity: this.state.opacity,
-         transition: 'opacity 3s',
+         transition: 'opacity 1.5s',
          display: this.state.display
       };
 

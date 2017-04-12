@@ -6,21 +6,24 @@ const Box = React.createClass( {
    getInitialState() {
       return {
          size: 100,
-         opacity: 0
+         opacity: 0,
+         bottom: '-21vw'
       };
    },
 
    mouseEnterHandler(e) {
       this.setState( {
          size: 120,
-         opacity: 1
+         opacity: 1,
+         bottom: 0
       } );
    },
 
    mouseLeaveHandler(e) {
       this.setState( {
          size: 100,
-         opacity: 0
+         opacity: 0,
+         bottom: '-21vw'
       } );
    },
 
@@ -46,10 +49,11 @@ const Box = React.createClass( {
          opacity: this.state.opacity,
          width: '100%',
          height: '100%',
-         backgroundColor: 'rgba(0, 0, 0, 0.95)',
+         backgroundColor: 'rgba(0, 0, 0, 0.85)',
          transition: 'opacity 0.3s',
          textAlign: 'center',
-         position: 'relative'
+         position: 'relative',
+         overflow: 'hidden'
       };
 
       const textStyle = {
@@ -57,11 +61,12 @@ const Box = React.createClass( {
          position: 'absolute',
          color: 'white',
          fontSize: 12,
-         bottom: 0,
+         bottom: this.state.bottom,
          left: 0,
          padding: 10,
          backgroundColor: 'black',
-         boxSizing: 'border-box'
+         boxSizing: 'border-box',
+         transition: 'all 0.3s'
       }
 
       return (
@@ -121,14 +126,14 @@ const SectionDiv = React.createClass( {
          path2 = '../img/Volunteer.png',
          path3 = '../img/philosoraptor.png';
       const text1 = `I am a JavaScript enthusiast, trying to build all my projects
-         with the minimal amount of external libraries, prefering to write as much code as
+         with the minimal amount of external libraries, preferring to write as much code as
          possible on my own.`;
-      const text2 = `Since a very young age I've been trying to learn physics, mathematics and programming.
-         Now I'm an undergraduate student at St. Anne's College in Oxford, studying Computer Science and
-         Philosophy.`;
-      const text3 = `In my free time I like spending my time by being in the middle of nature or
-         volunteering for projects that have a positive impact for those around, especially those focusing
-         on education.`;
+      const text2 = `Physics, Mathematics, Programming and Arts
+      are my main subjects of interest. Now I'm an undergraduate student at St. Anne's College
+      in Oxford, studying Computer Science and Philosophy.`;
+      const text3 = `I like spending my free time being in the middle of nature or
+         volunteering for projects that have a positive impact on society through
+         education or culture.`;
 
       return (
          <div style={ style } >

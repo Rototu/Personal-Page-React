@@ -123,7 +123,7 @@ const App = React.createClass( {
             this.setState( {
                display: 'none'
             } );
-         }, 3100);
+         }, 1600);
 
       }, loadIntervalTime * 7000);
    },
@@ -137,7 +137,7 @@ const App = React.createClass( {
          position: 'fixed',
          zIndex: 100,
          opacity: this.state.opacity,
-         transition: 'opacity 3s',
+         transition: 'opacity 1.5s',
          display: this.state.display
       };
 
