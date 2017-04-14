@@ -89,10 +89,15 @@ const ParallaxDiv = React.createClass( {
          transform: 'translateY(-50%)'
       };
 
+      const title = (
+         <span style={ spanStyle } dangerouslySetInnerHTML={ { __html: this.state.content } } >
+         </span>
+      );
+
       return (
          <div style={ style } >
-            <span style={ spanStyle } dangerouslySetInnerHTML={ { __html: this.state.content } } >
-            </span>
+            { this.props.name === 'title' && title }
+            { this.props.children }
          </div>
       );
 

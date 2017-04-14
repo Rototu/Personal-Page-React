@@ -34,7 +34,8 @@ const NavButton = React.createClass( {
          lineHeight: '40px',
          fontFamily: '"Lucida Console", Monaco, monospace',
          transition: 'all 0.15s',
-         color: this.state.txtColor
+         color: this.state.txtColor,
+         cursor: 'pointer'
       };
 
       return (
@@ -58,28 +59,28 @@ const Nav = React.createClass( {
    },
 
    handleScroll( e ) {
-      if( e.pageY >= window.innerHeight + 10 ) {
-         this.setState( {
-            top: window.innerHeight - e.pageY + 10,
-         } );
-      } else if( e.pageY >= window.innerHeight ) {
-         this.setState( {
-            top: 0,
-            color: 255,
-            highlightColor: 0
-         } );
-      } else if( e.pageY >= window.innerHeight - 40 ) {
-         this.setState( {
-            color: 255 * ( 1 - Math.max( ( window.innerHeight - e.pageY) / 40, 0 ) ),
-            highlightColor: 255 * ( window.innerHeight - e.pageY ) / 40
-         } );
-      } else {
-         this.setState( {
-            top: 0,
-            color: 0,
-            highlightColor: 255
-         } );
-      }
+      // if( e.pageY >= window.innerHeight + 10 ) {
+      //    this.setState( {
+      //       top: window.innerHeight - e.pageY + 10,
+      //    } );
+      // } else if( e.pageY >= window.innerHeight ) {
+      //    this.setState( {
+      //       top: 0,
+      //       color: 255,
+      //       highlightColor: 0
+      //    } );
+      // } else if( e.pageY >= window.innerHeight - 40 ) {
+      //    this.setState( {
+      //       color: 255 * ( 1 - Math.max( ( window.innerHeight - e.pageY) / 40, 0 ) ),
+      //       highlightColor: 255 * ( window.innerHeight - e.pageY ) / 40
+      //    } );
+      // } else {
+      //    this.setState( {
+      //       top: 0,
+      //       color: 0,
+      //       highlightColor: 255
+      //    } );
+      // }
    },
 
    componentDidMount() {
