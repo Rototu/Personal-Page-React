@@ -122,9 +122,9 @@ const SectionDiv = React.createClass( {
          position: 'relative'
       };
 
-      const path1 = '../img/js-men.png',
-         path2 = '../img/Volunteer.png',
-         path3 = '../img/philosoraptor.png';
+      const path1 = 'img/js-men.png',
+         path2 = 'img/Volunteer.png',
+         path3 = 'img/philosoraptor.png';
       const text1 = `I am a JavaScript enthusiast, trying to build all my projects
          with the minimal amount of external libraries, preferring to write as much code as
          possible on my own.`;
