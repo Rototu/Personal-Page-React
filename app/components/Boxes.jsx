@@ -34,9 +34,12 @@ const Box = React.createClass( {
          height: '21vw',
          minWidth: 200,
          minHeight: 200,
+         maxHeight: 300,
+         maxWidth: 300,
          backgroundColor: 'black',
          marginLeft: '6vw',
-         marginTop: 'calc(50vh - 10.5vw)',
+         marginTop: 250,
+         transform: 'translateY( -50% )',
          backgroundImage: 'url("' + this.props.path + '")',
          backgroundPosition: 'center',
          backgroundSize: this.state.size + '%' + this.state.size + '%',
@@ -89,7 +92,7 @@ const Section = React.createClass( {
 
       const style = {
          width: '33%',
-         height: '100vh',
+         height: '100%',
          float: 'left',
          position: 'relative',
          marginTop: 0,

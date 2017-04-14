@@ -28,7 +28,7 @@ const App = React.createClass( {
             <Loader />
             <Nav />
             <ParallaxDiv name='title' path='img/me.png' title={ title } height='100vh' />
-            <SectionDivBoxes name='page1' height='100vh' />
+            <SectionDivBoxes name='page1' height='500px' />
             <ParallaxDiv name='page2' path='img/code.png' title="Example" height='320px' >
                <Skill title='Photography' level={ 13 } />
                <Skill title='JavaScript' level={ 27 } />

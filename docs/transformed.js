@@ -10020,7 +10020,7 @@ const App = React.createClass({
          React.createElement(Loader, null),
          React.createElement(Nav, null),
          React.createElement(ParallaxDiv, { name: 'title', path: 'img/me.png', title: title, height: '100vh' }),
-         React.createElement(SectionDivBoxes, { name: 'page1', height: '100vh' }),
+         React.createElement(SectionDivBoxes, { name: 'page1', height: '500px' }),
          React.createElement(
             ParallaxDiv,
             { name: 'page2', path: 'img/code.png', title: 'Example', height: '320px' },
@@ -10092,9 +10092,12 @@ const Box = React.createClass({
          height: '21vw',
          minWidth: 200,
          minHeight: 200,
+         maxHeight: 300,
+         maxWidth: 300,
          backgroundColor: 'black',
          marginLeft: '6vw',
-         marginTop: 'calc(50vh - 10.5vw)',
+         marginTop: 250,
+         transform: 'translateY( -50% )',
          backgroundImage: 'url("' + this.props.path + '")',
          backgroundPosition: 'center',
          backgroundSize: this.state.size + '%' + this.state.size + '%',
@@ -10152,7 +10155,7 @@ const Section = React.createClass({
 
       const style = {
          width: '33%',
-         height: '100vh',
+         height: '100%',
          float: 'left',
          position: 'relative',
          marginTop: 0,
