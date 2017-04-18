@@ -10317,7 +10317,7 @@ const Gallery = React.createClass({
          title: 'Participating at the International MATh.en.JEANS 2017 conference in Marseille and Cluj-Napoca',
          path: 'img/matlan.jpg'
       }, {
-         title: 'Websites built from scratch by me',
+         title: 'Four websites built from scratch',
          path: 'img/websites.png'
       }];
 
