@@ -31,21 +31,21 @@ const App = React.createClass( {
             <ParallaxDiv name='title' path='img/me.png' title={ title } height='100vh' />
             <BoxesDiv name='page1' height='500px' />
             <ParallaxDiv name='page2' path='img/code.png' title="Example" height='420px' >
-               <Skill title='Photography' level={ 13 } />
-               <Skill title='JavaScript' level={ 27 } />
-               <Skill title='Friendliness' level={ 38 } />
-               <Skill title='Mathematics' level={ 18 } />
-               <Skill title='C++' level={ 10 } />
+               <Skill title='Photography' level={ 22 } />
+               <Skill title='JavaScript' level={ 30 } />
+               <Skill title='Friendliness' level={ 34 } />
+               <Skill title='Mathematics' level={ 20 } />
+               <Skill title='C++' level={ 14 } />
                <Skill title='Leadership' level={ 28 } />
-               <Skill title='Physics' level={ 26 } />
-               <Skill title='English' level={ 34 } />
+               <Skill title='Physics' level={ 24 } />
+               <Skill title='English' level={ 30 } />
                <Skill title='German' level={ 21 } />
-               <Skill title='Romanian' level={ 40 } />
+               <Skill title='Romanian' level={ 36 } />
                <Skill title='Sports' level={ 14 } />
                <Skill title='Node JS' level={ 18 } />
-               <Skill title='React JS' level={ 16 } />
-               <Skill title='Web Design' level={ 28 } />
-               <Skill title='Video Editing' level={ 25 } />
+               <Skill title='React JS' level={ 12 } />
+               <Skill title='Web Design' level={ 24 } />
+               <Skill title='Video Editing' level={ 22 } />
                <Skill title='Image Editing' level={ 28 } />
             </ParallaxDiv>
             <AchievmentGallery />
