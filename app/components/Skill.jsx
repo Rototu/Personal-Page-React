@@ -74,7 +74,8 @@ const Skill = React.createClass( {
          margin: '10px 2.5%',
          height: 60,
          float: 'left',
-         textAlign: 'center'
+         textAlign: 'center',
+         boxSizing: 'border-box'
       };
 
       const titleStyle = {

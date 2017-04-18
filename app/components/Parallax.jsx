@@ -74,7 +74,9 @@ const ParallaxDiv = React.createClass( {
          backgroundSize: 'auto 100%',
          backgroundRepeat: 'no-repeat',
          backgroundAttachment: 'fixed',
-         color: 'white'
+         color: 'white',
+         padding: '40px 0',
+         boxSizing: 'border-box'
       };
 
       const spanStyle = {

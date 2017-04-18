@@ -1,10 +1,11 @@
 const React = require( 'react' );
 const ReactDOM = require( 'react-dom' );
-const SectionDivBoxes = require( './Boxes.jsx' );
-const Loader = require( './Loader.jsx' );
-const Nav = require( './Menu.jsx' );
-const ParallaxDiv = require( './Parallax.jsx' );
-const Skill = require( './Skill.jsx' );
+const Loader = require( './Loader.jsx' ); // Loading screen
+const Nav = require( './Menu.jsx' ); // Nav Bar
+const ParallaxDiv = require( './Parallax.jsx' ); // Parallax Divs
+const BoxesDiv = require( './Boxes.jsx' ); // Image Boxes with description
+const Skill = require( './Skill.jsx' ); // Skill Counter Div
+const AchievmentGallery = require( './Gallery.jsx' ); // Gallery for Achievments
 
 const title = `EMANUEL FARAUANU <br/> Programmer & Volunteer`;
 
@@ -28,8 +29,8 @@ const App = React.createClass( {
             <Loader />
             <Nav />
             <ParallaxDiv name='title' path='img/me.png' title={ title } height='100vh' />
-            <SectionDivBoxes name='page1' height='500px' />
-            <ParallaxDiv name='page2' path='img/code.png' title="Example" height='320px' >
+            <BoxesDiv name='page1' height='500px' />
+            <ParallaxDiv name='page2' path='img/code.png' title="Example" height='420px' >
                <Skill title='Photography' level={ 13 } />
                <Skill title='JavaScript' level={ 27 } />
                <Skill title='Friendliness' level={ 38 } />
@@ -46,8 +47,8 @@ const App = React.createClass( {
                <Skill title='Web Design' level={ 28 } />
                <Skill title='Video Editing' level={ 25 } />
                <Skill title='Image Editing' level={ 28 } />
-
             </ParallaxDiv>
+            <AchievmentGallery />
          </div>
       );
    }
