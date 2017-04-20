@@ -22,15 +22,10 @@ const Bar = React.createClass( {
       }
 
       const style = {
-         display: 'inline-block',
-         height: '50%',
-         width: 2,
-         backgroundColor: this.state.bgColor,
-         borderRadius: 1,
-         marginLeft: 2
+         backgroundColor: this.state.bgColor
       };
 
-      return <div style={ style } />;
+      return <div className="bar" style={ style } />;
 
    }
 
@@ -69,34 +64,14 @@ const Skill = React.createClass( {
 
    render() {
 
-      const style = {
-         width: '20%',
-         margin: '10px 2.5%',
-         height: 60,
-         float: 'left',
-         textAlign: 'center',
-         boxSizing: 'border-box'
-      };
-
-      const titleStyle = {
-         display: 'inline-block',
-         width: '100%',
-         margin: '0 20px 0 0',
-         lineHeight: '30px',
-         fontSize: 20,
-         fontWeight: '100',
-         color: 'white',
-         fontFamily: '"Lucida Console", Monaco, monospace',
-      }
-
       const Bars = [];
       for( i = 1; i <= 40; i++ ) {
          Bars.push( <Bar key={ i } id={ i } level = { this.state.level } /> );
       }
 
       return (
-         <div style={ style } >
-            <span style={ titleStyle }>
+         <div className="skill" >
+            <span className="skill-title">
                { this.props.title }
             </span>
             { Bars }

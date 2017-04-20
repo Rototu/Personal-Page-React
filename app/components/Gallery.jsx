@@ -31,14 +31,7 @@ const Button = React.createClass( {
    render() {
 
       const style = {
-         height: 10,
-         width: 10,
-         backgroundColor: 'black',
-         boxSizing: 'border-box',
-         borderRadius: 5,
-         margin: '0 20px',
-         display: 'inline-block',
-         cursor: 'pointer'
+         backgroundColor: 'black'
       }
 
       if( this.props.id === this.props.displayId ) {
@@ -47,7 +40,7 @@ const Button = React.createClass( {
       }
 
       return (
-            <div style={ style } onClick= { this.props.clickHandler.bind( null, this.props.id ) }/>
+            <div className="button" style={ style } onClick= { this.props.clickHandler.bind( null, this.props.id ) }/>
       );
 
    }
@@ -58,17 +51,6 @@ const GalleryNav = React.createClass( {
 
    render() {
 
-
-      const style = {
-         height: 20,
-         width: '100%',
-         zIndex: 2,
-         position: 'absolute',
-         bottom: 20,
-         left: 0,
-         textAlign: 'center'
-      };
-
       const Buttons = [];
       for( let i = 0; i < 7; i++ ) {
          Buttons.push( <Button displayId={ this.props.displayId }
@@ -76,7 +58,7 @@ const GalleryNav = React.createClass( {
       }
 
       return (
-            <div style={ style } >
+            <div className="gallery-nav" >
                { Buttons }
             </div>
       );
@@ -97,44 +79,14 @@ const Achievment = React.createClass( {
 
 
       const style = {
-         position: 'absolute',
-         top: 0,
          left: `${ ( this.props.id - this.props.displayId ) * 100 }%`,
-         width: '100%',
-         height: '100%',
-         backgroundImage: `url("${ this.props.imgSrc }")`,
-         backgroundPosition: 'center',
-         backgroundSize: 'cover',
-         transition: 'left 1s'
-      };
-
-      const innerStyle = {
-         width: '100%',
-         height: '100%',
-         backgroundColor: 'rgba(255, 255, 255, 0.8)',
-         color: 'black',
-         position: 'relative',
-         margin: 0
-      };
-
-      const textStyle = {
-         position: 'absolute',
-         fontSize: 30,
-         lineHeight: '30px',
-         color: 'black',
-         textAlign: 'center',
-         width: '100%',
-         padding: '0 10%',
-         left: '0',
-         top: '50%',
-         transform: 'translateY(-50%)',
-         boxSizing: 'border-box'
+         backgroundImage: `url("${ this.props.imgSrc }")`
       };
 
       return (
-         <div style={ style } >
-            <div style={ innerStyle } >
-               <p style={ textStyle } >
+         <div className="achievment" style={ style } >
+            <div className="achievment-inner" >
+               <p className="achievment-inner-text" >
                   { this.props.title }
                </p>
             </div>
@@ -161,14 +113,6 @@ const Gallery = React.createClass( {
 
    render() {
 
-      const style = {
-         position: 'relative',
-         width: '100%',
-         height: '100vh',
-         backgroundColor: 'white',
-         overflow: 'hidden'
-      };
-
       const Achievments = [];
       for( let i = 0; i < 7; i++ ) {
          Achievments.push( <Achievment key={ i } id={ i } displayId={ this.state.achievment }
@@ -176,7 +120,7 @@ const Gallery = React.createClass( {
       }
 
       return (
-         <div style={ style } >
+         <div className="gallery" >
             { Achievments }
             <GalleryNav displayId={ this.state.achievment } clickHandler={ this.clickHandler }/>
          </div>

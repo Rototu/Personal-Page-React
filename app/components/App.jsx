@@ -9,24 +9,83 @@ const AchievmentGallery = require( './Gallery.jsx' ); // Gallery for Achievments
 const Contact = require( './Contact.jsx' );
 
 const title = `EMANUEL FARAUANU <br/> Programmer & Volunteer`;
+let resizeTimeout;
 
 const App = React.createClass( {
 
+   getInitialState() {
+
+      let boxDivHeight = '500px',
+         skillsHeight = '420px';
+
+      if( window.innerWidth <= 400 ) {
+         boxDivHeight = '700px';
+         skillsHeight = '280px';
+      } else if( window.innerWidth <= 640 ) {
+         boxDivHeight = '180px';
+         skillsHeight = '280px';
+      } else if( window.innerWidth <= 810 ) {
+         boxDivHeight = '280px';
+         skillsHeight = '280px';
+      }
+
+      return{
+         boxDivHeight: boxDivHeight,
+         skillsHeight: skillsHeight
+      }
+
+   },
+
+   resizeThrottler() {
+      if ( !resizeTimeout ) {
+         const self = this;
+         resizeTimeout = setTimeout( () => {
+            resizeTimeout = null;
+            self.resizeHandler();
+         }, 100);
+      }
+   },
+
+   resizeHandler() {
+
+      let boxDivHeight = '500px',
+         skillsHeight = '420px';
+
+      if( window.innerWidth <= 400 ) {
+         boxDivHeight = '700px';
+         skillsHeight = '280px';
+      } else if( window.innerWidth <= 640 ) {
+         boxDivHeight = '180px';
+         skillsHeight = '280px';
+      } else if( window.innerWidth <= 810 ) {
+         boxDivHeight = '280px';
+         skillsHeight = '280px';
+      }
+
+      this.setState( {
+         boxDivHeight: boxDivHeight,
+         skillsHeight: skillsHeight
+      } );
+
+   },
+
+   componentDidMount() {
+      window.addEventListener('resize', this.resizeThrottler, false);
+   },
+
+   componentWillUnmount() {
+      window.removeEventListener('resize', this.resizeThrottler);
+   },
+
    render() {
 
-      const style = {
-         margin: 0,
-         width: '100%',
-         fontFamily: '"Lucida Console", Monaco, monospace'
-      };
-
       return (
-         <div style={ style } ref={(ref) => this._div = ref} >
+         <div className="app" >
             <Loader />
             <Nav />
             <ParallaxDiv name='title' path='img/me.png' title={ title } height='100vh' />
-            <BoxesDiv name='page1' height='500px' />
-            <ParallaxDiv name='page2' path='img/code.png' title="Skills" height='420px' >
+            <BoxesDiv name='page1' height={ this.state.boxDivHeight } />
+            <ParallaxDiv name='page2' path='img/code.png' title="Skills" height={ this.state.skillsHeight } >
                <Skill title='Photography' level={ 22 } />
                <Skill title='JavaScript' level={ 30 } />
                <Skill title='Friendliness' level={ 34 } />

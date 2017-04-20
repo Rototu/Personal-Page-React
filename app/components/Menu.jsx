@@ -25,7 +25,18 @@ const NavButton = React.createClass( {
    clickHandler( e ) {
 
       const h = window.innerHeight;
-      const scrollPositions = [ 0, h, h+500, h+920, h+1320 ];
+
+      let scrollPositions = [];
+      if( window.innerWidth <= 400 ) {
+         scrollPositions = [ 0, h, h+700, h+980, h+1380 ]
+      } else if( window.innerWidth <= 640 ) {
+         scrollPositions = [ 0, h, h+180, h+460, h+860 ];
+      } else if( window.innerWidth <= 810 ) {
+         scrollPositions = [ 0, h, h+280, h+560, h+960 ];
+      } else {
+         scrollPositions = [ 0, h, h+500, h+920, h+1320 ];
+      }
+
       const scrollToPos = scrollPositions[ this.props.id ];
       const totalScrollValue = Math.abs( window.scrollY - scrollToPos );
 
@@ -36,11 +47,11 @@ const NavButton = React.createClass( {
          const coefficient = Math.abs( 1 - 2 * scrollValue / totalScrollValue );
          const scrollCoefficient = Math.min( 0.9, coefficient );
          const scrollAcceleration = Math.cos( scrollCoefficient * Math.PI / 2 );
-         const scrollAmount = 30 * scrollAcceleration;
+         const scrollAmount = 20 * scrollAcceleration;
 
          console.log(scrollCoefficient);
 
-         if( scrollValue >= 15 ) {
+         if( scrollValue >= 10 ) {
 
             if( currScrollPos > scrollToPos ) {
                window.scrollTo( 0, currScrollPos - scrollAmount );
@@ -64,24 +75,14 @@ const NavButton = React.createClass( {
    render() {
 
       const style = {
-         fontSize: 24,
-         textAlign: 'center',
-         display: 'inline-block',
-         padding: '0 20px',
-         fontWeight: 400,
-         height: 40,
-         lineHeight: '40px',
-         fontFamily: '"Lucida Console", Monaco, monospace',
-         transition: 'all 0.15s',
-         color: this.state.txtColor,
-         cursor: 'pointer'
+         color: this.state.txtColor
       };
 
       return (
          <div onClick={ this.clickHandler }
             onMouseEnter={ this.mouseEnterHandler }
             onMouseLeave={ this.mouseLeaveHandler }
-            style={ style } >
+            style={ style } className="nav-button" >
 
             { this.props.name }
 
@@ -142,18 +143,11 @@ const Nav = React.createClass( {
 
       const style = {
          backgroundColor: bgColor,
-         width: '100%',
-         height: 40,
-         cursor: 'default',
-         position: 'fixed',
-         top: this.state.top,
-         left: 0,
-         textAlign: 'center',
-         zIndex: 80
+         top: this.state.top
       };
 
       return (
-         <div style={ style } >
+         <div className="nav" style={ style } >
             <NavButton id={ 0 } name='Home' hColor={ this.state.highlightColor } />
             <NavButton id={ 1 } name='About Me' hColor={ this.state.highlightColor } />
             <NavButton id={ 2 } name='Skills' hColor={ this.state.highlightColor } />

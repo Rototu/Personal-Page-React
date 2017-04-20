@@ -5,13 +5,13 @@ const loadIntervalTime = 0.6 // seconds
 
 const Loader = React.createClass( {
 
-   getInitialState: function () {
+   getInitialState() {
       return {
          highlight: 'left'
       };
    },
 
-   componentDidMount: function () {
+   componentDidMount() {
       const self = this;
       window.loadingInterval = setInterval( () => {
          if ( this.state.highlight === 'left' ) {
@@ -26,20 +26,10 @@ const Loader = React.createClass( {
       }, 3000);
    },
 
-   render: function () {
-
-      const loaderStyle = {
-         width: 200,
-         height: 200,
-         top: 'calc(50vh - 100px)',
-         left: 'calc(50vw - 100px)',
-         position: 'absolute',
-         fontSize: 100,
-         fontFamily: '"Lucida Console", Monaco, monospace'
-      };
+   render() {
 
       return (
-         <div style={ loaderStyle } >
+         <div className="loader" >
             <LeftBrace highlight={this.state.highlight} />
             <RightBrace highlight={this.state.highlight} />
          </div>
@@ -51,7 +41,7 @@ const Loader = React.createClass( {
 
 const LeftBrace = React.createClass( {
 
-   render: function () {
+   render() {
 
       let opacity = 0.4;
       if( this.props.highlight === 'left' ) {
@@ -60,17 +50,16 @@ const LeftBrace = React.createClass( {
          opacity = 0;
       }
 
-      const leftBraceStyle = {
-         width: 100,
-         lineHeight: '200px',
-         textAlign: 'center',
-         color: 'white',
-         float: 'left',
+      const style = {
          opacity: opacity,
          transition: 'all ' + loadIntervalTime + 's'
       };
 
-      return <div style={ leftBraceStyle } > { '{' } < /div>;
+      return (
+         <div className="brace" style={ style } >
+            { '{' }
+         < /div>
+      );
 
    }
 
@@ -78,7 +67,7 @@ const LeftBrace = React.createClass( {
 
 const RightBrace = React.createClass( {
 
-   render: function () {
+   render() {
 
       let opacity = 0.4;
       if( this.props.highlight === 'right' ) {
@@ -87,32 +76,31 @@ const RightBrace = React.createClass( {
          opacity = 0;
       }
 
-      const rightBraceStyle = {
-         width: 100,
-         lineHeight: '200px',
-         textAlign: 'center',
-         color: 'white',
-         float: 'left',
+      const style = {
          opacity: opacity,
          transition: 'all ' + loadIntervalTime + 's'
       };
 
-      return <div style={ rightBraceStyle } > { '}' } < /div>;
+      return (
+         <div className="brace" style={ style } >
+            { '}' }
+         < /div>
+      );
 
    }
 
 } );
 
-const App = React.createClass( {
+const LoaderScreen = React.createClass( {
 
-   getInitialState: function () {
+   getInitialState() {
       return( {
          opacity: 1,
          display: 'block'
       } );
    },
 
-   componentDidMount: function () {
+   componentDidMount() {
       setTimeout( () => {
 
          this.setState( {
@@ -128,24 +116,22 @@ const App = React.createClass( {
       }, loadIntervalTime * 7000);
    },
 
-   render: function () {
+   render() {
 
-      const screenStyle = {
-         width: '100%',
-         height: '100vh',
-         backgroundColor: 'black',
-         position: 'fixed',
-         zIndex: 100,
+      const style = {
          opacity: this.state.opacity,
-         transition: 'opacity 1.5s',
          display: this.state.display
       };
 
-      return <div style={ screenStyle } > < Loader / > < /div>;
+      return (
+         <div className="loader-screen" style={ style } >
+            < Loader / >
+         < /div>
+      );
 
    }
 
 } );
 
 
-module.exports = App;
+module.exports = LoaderScreen;

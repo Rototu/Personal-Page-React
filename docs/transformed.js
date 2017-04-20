@@ -9998,29 +9998,86 @@ const AchievmentGallery = __webpack_require__(85); // Gallery for Achievments
 const Contact = __webpack_require__(84);
 
 const title = `EMANUEL FARAUANU <br/> Programmer & Volunteer`;
+let resizeTimeout;
 
 const App = React.createClass({
    displayName: 'App',
 
 
-   render() {
+   getInitialState() {
 
-      const style = {
-         margin: 0,
-         width: '100%',
-         fontFamily: '"Lucida Console", Monaco, monospace'
+      let boxDivHeight = '500px',
+          skillsHeight = '420px';
+
+      if (window.innerWidth <= 400) {
+         boxDivHeight = '700px';
+         skillsHeight = '280px';
+      } else if (window.innerWidth <= 640) {
+         boxDivHeight = '180px';
+         skillsHeight = '280px';
+      } else if (window.innerWidth <= 810) {
+         boxDivHeight = '280px';
+         skillsHeight = '280px';
+      }
+
+      return {
+         boxDivHeight: boxDivHeight,
+         skillsHeight: skillsHeight
       };
+   },
+
+   resizeThrottler() {
+      if (!resizeTimeout) {
+         const self = this;
+         resizeTimeout = setTimeout(() => {
+            resizeTimeout = null;
+            self.resizeHandler();
+         }, 100);
+      }
+   },
+
+   resizeHandler() {
+
+      let boxDivHeight = '500px',
+          skillsHeight = '420px';
+
+      if (window.innerWidth <= 400) {
+         boxDivHeight = '700px';
+         skillsHeight = '280px';
+      } else if (window.innerWidth <= 640) {
+         boxDivHeight = '180px';
+         skillsHeight = '280px';
+      } else if (window.innerWidth <= 810) {
+         boxDivHeight = '280px';
+         skillsHeight = '280px';
+      }
+
+      this.setState({
+         boxDivHeight: boxDivHeight,
+         skillsHeight: skillsHeight
+      });
+   },
+
+   componentDidMount() {
+      window.addEventListener('resize', this.resizeThrottler, false);
+   },
+
+   componentWillUnmount() {
+      window.removeEventListener('resize', this.resizeThrottler);
+   },
+
+   render() {
 
       return React.createElement(
          'div',
-         { style: style, ref: ref => this._div = ref },
+         { className: 'app' },
          React.createElement(Loader, null),
          React.createElement(Nav, null),
          React.createElement(ParallaxDiv, { name: 'title', path: 'img/me.png', title: title, height: '100vh' }),
-         React.createElement(BoxesDiv, { name: 'page1', height: '500px' }),
+         React.createElement(BoxesDiv, { name: 'page1', height: this.state.boxDivHeight }),
          React.createElement(
             ParallaxDiv,
-            { name: 'page2', path: 'img/code.png', title: 'Skills', height: '420px' },
+            { name: 'page2', path: 'img/code.png', title: 'Skills', height: this.state.skillsHeight },
             React.createElement(Skill, { title: 'Photography', level: 22 }),
             React.createElement(Skill, { title: 'JavaScript', level: 30 }),
             React.createElement(Skill, { title: 'Friendliness', level: 34 }),
@@ -10091,57 +10148,27 @@ const Box = React.createClass({
    render() {
 
       const style = {
-         width: '21vw',
-         height: '21vw',
-         minWidth: 200,
-         minHeight: 200,
-         maxHeight: 300,
-         maxWidth: 300,
-         backgroundColor: 'black',
-         marginLeft: '6vw',
-         marginTop: 250,
-         transform: 'translateY( -50% )',
          backgroundImage: 'url("' + this.props.path + '")',
-         backgroundPosition: 'center',
-         backgroundSize: this.state.size + '%' + this.state.size + '%',
-         transition: 'all 0.3s',
-         boxSizing: 'border-box',
-         border: 'solid black 10px'
+         backgroundSize: this.state.size + '%' + this.state.size + '%'
       };
 
       const innerStyle = {
-         opacity: this.state.opacity,
-         width: '100%',
-         height: '100%',
-         backgroundColor: 'rgba(0, 0, 0, 0.85)',
-         transition: 'opacity 0.3s',
-         textAlign: 'center',
-         position: 'relative',
-         overflow: 'hidden'
+         opacity: this.state.opacity
       };
 
       const textStyle = {
-         width: '100%',
-         position: 'absolute',
-         color: 'white',
-         fontSize: 12,
-         bottom: this.state.bottom,
-         left: 0,
-         padding: 10,
-         backgroundColor: 'black',
-         boxSizing: 'border-box',
-         transition: 'all 0.3s'
+         bottom: this.state.bottom
       };
 
       return React.createElement(
          'div',
-         { style: style, onMouseEnter: this.mouseEnterHandler, onMouseLeave: this.mouseLeaveHandler },
+         { className: 'box', style: style, onMouseEnter: this.mouseEnterHandler, onMouseLeave: this.mouseLeaveHandler },
          React.createElement(
             'div',
-            { style: innerStyle },
+            { className: 'box-inner', style: innerStyle },
             React.createElement(
                'div',
-               { style: textStyle },
+               { className: 'box-inner-text', style: textStyle },
                this.props.text
             )
          )
@@ -10156,19 +10183,9 @@ const Section = React.createClass({
 
    render() {
 
-      const style = {
-         width: '33%',
-         height: '100%',
-         float: 'left',
-         position: 'relative',
-         marginTop: 0,
-         marginLeft: 0,
-         backgroundColor: 'white'
-      };
-
       return React.createElement(
          'div',
-         { style: style },
+         { className: 'section' },
          React.createElement(Box, { path: this.props.path, text: this.props.text })
       );
    }
@@ -10182,14 +10199,7 @@ const SectionDiv = React.createClass({
    render() {
 
       const style = {
-         width: '100%',
-         height: this.props.height,
-         backgroundColor: 'white',
-         color: 'black',
-         fontFamily: 'sans-serif',
-         fontWeight: 100,
-         textAlign: 'center',
-         position: 'relative'
+         height: this.props.height
       };
 
       const path1 = 'img/js-men.png',
@@ -10207,7 +10217,7 @@ const SectionDiv = React.createClass({
 
       return React.createElement(
          'div',
-         { style: style },
+         { className: 'section-div', style: style },
          React.createElement(Section, { path: path1, text: text1 }),
          React.createElement(Section, { path: path2, text: text2 }),
          React.createElement(Section, { path: path3, text: text3 })
@@ -10231,38 +10241,18 @@ const Contact = React.createClass({
 
    render() {
 
-      const style = {
-         width: '100%',
-         textAlign: 'center',
-         height: 50,
-         marginTop: 135,
-         position: 'relative'
-      };
-
-      const aStyle = {
-         width: 50,
-         height: 50,
-         display: 'inline-block',
-         margin: '0 20px'
-      };
-
-      const imgStyle = {
-         width: '100%',
-         height: '100%'
-      };
-
       return React.createElement(
          'div',
-         { style: style },
+         { className: 'contact' },
          React.createElement(
             'a',
-            { href: 'https://www.facebook.com/harrypotterCluj', target: '_blank', style: aStyle },
-            React.createElement('img', { src: 'img/fb.png', style: imgStyle })
+            { href: 'https://www.facebook.com/harrypotterCluj', target: '_blank' },
+            React.createElement('img', { src: 'img/fb.png' })
          ),
          React.createElement(
             'a',
-            { href: 'mailto:emanuel.farauanu@gmail.com?Subject=Contact%20Page', target: '_blank', style: aStyle },
-            React.createElement('img', { src: 'img/mail.png', style: imgStyle })
+            { href: 'mailto:emanuel.farauanu@gmail.com?Subject=Contact%20Page', target: '_blank' },
+            React.createElement('img', { src: 'img/mail.png' })
          )
       );
    }
@@ -10308,14 +10298,7 @@ const Button = React.createClass({
    render() {
 
       const style = {
-         height: 10,
-         width: 10,
-         backgroundColor: 'black',
-         boxSizing: 'border-box',
-         borderRadius: 5,
-         margin: '0 20px',
-         display: 'inline-block',
-         cursor: 'pointer'
+         backgroundColor: 'black'
       };
 
       if (this.props.id === this.props.displayId) {
@@ -10323,7 +10306,7 @@ const Button = React.createClass({
          style.border = 'solid black 2px';
       }
 
-      return React.createElement('div', { style: style, onClick: this.props.clickHandler.bind(null, this.props.id) });
+      return React.createElement('div', { className: 'button', style: style, onClick: this.props.clickHandler.bind(null, this.props.id) });
    }
 
 });
@@ -10334,16 +10317,6 @@ const GalleryNav = React.createClass({
 
    render() {
 
-      const style = {
-         height: 20,
-         width: '100%',
-         zIndex: 2,
-         position: 'absolute',
-         bottom: 20,
-         left: 0,
-         textAlign: 'center'
-      };
-
       const Buttons = [];
       for (let i = 0; i < 7; i++) {
          Buttons.push(React.createElement(Button, { displayId: this.props.displayId,
@@ -10352,7 +10325,7 @@ const GalleryNav = React.createClass({
 
       return React.createElement(
          'div',
-         { style: style },
+         { className: 'gallery-nav' },
          Buttons
       );
    }
@@ -10370,49 +10343,19 @@ const Achievment = React.createClass({
    render() {
 
       const style = {
-         position: 'absolute',
-         top: 0,
          left: `${(this.props.id - this.props.displayId) * 100}%`,
-         width: '100%',
-         height: '100%',
-         backgroundImage: `url("${this.props.imgSrc}")`,
-         backgroundPosition: 'center',
-         backgroundSize: 'cover',
-         transition: 'left 1s'
-      };
-
-      const innerStyle = {
-         width: '100%',
-         height: '100%',
-         backgroundColor: 'rgba(255, 255, 255, 0.8)',
-         color: 'black',
-         position: 'relative',
-         margin: 0
-      };
-
-      const textStyle = {
-         position: 'absolute',
-         fontSize: 30,
-         lineHeight: '30px',
-         color: 'black',
-         textAlign: 'center',
-         width: '100%',
-         padding: '0 10%',
-         left: '0',
-         top: '50%',
-         transform: 'translateY(-50%)',
-         boxSizing: 'border-box'
+         backgroundImage: `url("${this.props.imgSrc}")`
       };
 
       return React.createElement(
          'div',
-         { style: style },
+         { className: 'achievment', style: style },
          React.createElement(
             'div',
-            { style: innerStyle },
+            { className: 'achievment-inner' },
             React.createElement(
                'p',
-               { style: textStyle },
+               { className: 'achievment-inner-text' },
                this.props.title
             )
          )
@@ -10439,14 +10382,6 @@ const Gallery = React.createClass({
 
    render() {
 
-      const style = {
-         position: 'relative',
-         width: '100%',
-         height: '100vh',
-         backgroundColor: 'white',
-         overflow: 'hidden'
-      };
-
       const Achievments = [];
       for (let i = 0; i < 7; i++) {
          Achievments.push(React.createElement(Achievment, { key: i, id: i, displayId: this.state.achievment,
@@ -10455,7 +10390,7 @@ const Gallery = React.createClass({
 
       return React.createElement(
          'div',
-         { style: style },
+         { className: 'gallery' },
          Achievments,
          React.createElement(GalleryNav, { displayId: this.state.achievment, clickHandler: this.clickHandler })
       );
@@ -10478,13 +10413,13 @@ const Loader = React.createClass({
    displayName: 'Loader',
 
 
-   getInitialState: function () {
+   getInitialState() {
       return {
          highlight: 'left'
       };
    },
 
-   componentDidMount: function () {
+   componentDidMount() {
       const self = this;
       window.loadingInterval = setInterval(() => {
          if (this.state.highlight === 'left') {
@@ -10499,21 +10434,11 @@ const Loader = React.createClass({
       }, 3000);
    },
 
-   render: function () {
-
-      const loaderStyle = {
-         width: 200,
-         height: 200,
-         top: 'calc(50vh - 100px)',
-         left: 'calc(50vw - 100px)',
-         position: 'absolute',
-         fontSize: 100,
-         fontFamily: '"Lucida Console", Monaco, monospace'
-      };
+   render() {
 
       return React.createElement(
          'div',
-         { style: loaderStyle },
+         { className: 'loader' },
          React.createElement(LeftBrace, { highlight: this.state.highlight }),
          React.createElement(RightBrace, { highlight: this.state.highlight })
       );
@@ -10525,7 +10450,7 @@ const LeftBrace = React.createClass({
    displayName: 'LeftBrace',
 
 
-   render: function () {
+   render() {
 
       let opacity = 0.4;
       if (this.props.highlight === 'left') {
@@ -10534,22 +10459,15 @@ const LeftBrace = React.createClass({
          opacity = 0;
       }
 
-      const leftBraceStyle = {
-         width: 100,
-         lineHeight: '200px',
-         textAlign: 'center',
-         color: 'white',
-         float: 'left',
+      const style = {
          opacity: opacity,
          transition: 'all ' + loadIntervalTime + 's'
       };
 
       return React.createElement(
          'div',
-         { style: leftBraceStyle },
-         ' ',
-         '{',
-         ' '
+         { className: 'brace', style: style },
+         '{'
       );
    }
 
@@ -10559,7 +10477,7 @@ const RightBrace = React.createClass({
    displayName: 'RightBrace',
 
 
-   render: function () {
+   render() {
 
       let opacity = 0.4;
       if (this.props.highlight === 'right') {
@@ -10568,39 +10486,32 @@ const RightBrace = React.createClass({
          opacity = 0;
       }
 
-      const rightBraceStyle = {
-         width: 100,
-         lineHeight: '200px',
-         textAlign: 'center',
-         color: 'white',
-         float: 'left',
+      const style = {
          opacity: opacity,
          transition: 'all ' + loadIntervalTime + 's'
       };
 
       return React.createElement(
          'div',
-         { style: rightBraceStyle },
-         ' ',
-         '}',
-         ' '
+         { className: 'brace', style: style },
+         '}'
       );
    }
 
 });
 
-const App = React.createClass({
-   displayName: 'App',
+const LoaderScreen = React.createClass({
+   displayName: 'LoaderScreen',
 
 
-   getInitialState: function () {
+   getInitialState() {
       return {
          opacity: 1,
          display: 'block'
       };
    },
 
-   componentDidMount: function () {
+   componentDidMount() {
       setTimeout(() => {
 
          this.setState({
@@ -10615,31 +10526,23 @@ const App = React.createClass({
       }, loadIntervalTime * 7000);
    },
 
-   render: function () {
+   render() {
 
-      const screenStyle = {
-         width: '100%',
-         height: '100vh',
-         backgroundColor: 'black',
-         position: 'fixed',
-         zIndex: 100,
+      const style = {
          opacity: this.state.opacity,
-         transition: 'opacity 1.5s',
          display: this.state.display
       };
 
       return React.createElement(
          'div',
-         { style: screenStyle },
-         ' ',
-         React.createElement(Loader, null),
-         ' '
+         { className: 'loader-screen', style: style },
+         React.createElement(Loader, null)
       );
    }
 
 });
 
-module.exports = App;
+module.exports = LoaderScreen;
 
 /***/ }),
 /* 87 */
@@ -10674,7 +10577,18 @@ const NavButton = React.createClass({
    clickHandler(e) {
 
       const h = window.innerHeight;
-      const scrollPositions = [0, h, h + 500, h + 920, h + 1320];
+
+      let scrollPositions = [];
+      if (window.innerWidth <= 400) {
+         scrollPositions = [0, h, h + 700, h + 980, h + 1380];
+      } else if (window.innerWidth <= 640) {
+         scrollPositions = [0, h, h + 180, h + 460, h + 860];
+      } else if (window.innerWidth <= 810) {
+         scrollPositions = [0, h, h + 280, h + 560, h + 960];
+      } else {
+         scrollPositions = [0, h, h + 500, h + 920, h + 1320];
+      }
+
       const scrollToPos = scrollPositions[this.props.id];
       const totalScrollValue = Math.abs(window.scrollY - scrollToPos);
 
@@ -10685,11 +10599,11 @@ const NavButton = React.createClass({
          const coefficient = Math.abs(1 - 2 * scrollValue / totalScrollValue);
          const scrollCoefficient = Math.min(0.9, coefficient);
          const scrollAcceleration = Math.cos(scrollCoefficient * Math.PI / 2);
-         const scrollAmount = 30 * scrollAcceleration;
+         const scrollAmount = 20 * scrollAcceleration;
 
          console.log(scrollCoefficient);
 
-         if (scrollValue >= 15) {
+         if (scrollValue >= 10) {
 
             if (currScrollPos > scrollToPos) {
                window.scrollTo(0, currScrollPos - scrollAmount);
@@ -10709,17 +10623,7 @@ const NavButton = React.createClass({
    render() {
 
       const style = {
-         fontSize: 24,
-         textAlign: 'center',
-         display: 'inline-block',
-         padding: '0 20px',
-         fontWeight: 400,
-         height: 40,
-         lineHeight: '40px',
-         fontFamily: '"Lucida Console", Monaco, monospace',
-         transition: 'all 0.15s',
-         color: this.state.txtColor,
-         cursor: 'pointer'
+         color: this.state.txtColor
       };
 
       return React.createElement(
@@ -10727,7 +10631,7 @@ const NavButton = React.createClass({
          { onClick: this.clickHandler,
             onMouseEnter: this.mouseEnterHandler,
             onMouseLeave: this.mouseLeaveHandler,
-            style: style },
+            style: style, className: 'nav-button' },
          this.props.name
       );
    }
@@ -10786,19 +10690,12 @@ const Nav = React.createClass({
 
       const style = {
          backgroundColor: bgColor,
-         width: '100%',
-         height: 40,
-         cursor: 'default',
-         position: 'fixed',
-         top: this.state.top,
-         left: 0,
-         textAlign: 'center',
-         zIndex: 80
+         top: this.state.top
       };
 
       return React.createElement(
          'div',
-         { style: style },
+         { className: 'nav', style: style },
          React.createElement(NavButton, { id: 0, name: 'Home', hColor: this.state.highlightColor }),
          React.createElement(NavButton, { id: 1, name: 'About Me', hColor: this.state.highlightColor }),
          React.createElement(NavButton, { id: 2, name: 'Skills', hColor: this.state.highlightColor }),
@@ -10883,36 +10780,15 @@ const ParallaxDiv = React.createClass({
    render() {
 
       const style = {
-         width: '100%',
          height: this.props.height,
-         backgroundColor: 'black',
-         backgroundImage: 'url("' + this.props.path + '")',
-         backgroundPosition: '100% 50%',
-         backgroundSize: 'auto 100%',
-         backgroundRepeat: 'no-repeat',
-         backgroundAttachment: 'fixed',
-         color: 'white',
-         padding: '40px 0',
-         boxSizing: 'border-box'
+         backgroundImage: 'url("' + this.props.path + '")'
       };
 
-      const spanStyle = {
-         lineHeight: '30px',
-         fontSize: '28px',
-         width: '100%',
-         fontFamily: '"Lucida Console", Monaco, monospace',
-         fontWeight: 100,
-         textAlign: 'center',
-         display: 'inline-block',
-         marginTop: '50vh',
-         transform: 'translateY(-50%)'
-      };
-
-      const title = React.createElement('span', { style: spanStyle, dangerouslySetInnerHTML: { __html: this.state.content } });
+      const title = React.createElement('span', { className: 'parallax-div-text', dangerouslySetInnerHTML: { __html: this.state.content } });
 
       return React.createElement(
          'div',
-         { style: style },
+         { className: 'parallax-div', style: style },
          this.props.name === 'title' && title,
          this.props.children
       );
@@ -10952,15 +10828,10 @@ const Bar = React.createClass({
       }
 
       const style = {
-         display: 'inline-block',
-         height: '50%',
-         width: 2,
-         backgroundColor: this.state.bgColor,
-         borderRadius: 1,
-         marginLeft: 2
+         backgroundColor: this.state.bgColor
       };
 
-      return React.createElement('div', { style: style });
+      return React.createElement('div', { className: 'bar', style: style });
    }
 
 });
@@ -11000,26 +10871,6 @@ const Skill = React.createClass({
 
    render() {
 
-      const style = {
-         width: '20%',
-         margin: '10px 2.5%',
-         height: 60,
-         float: 'left',
-         textAlign: 'center',
-         boxSizing: 'border-box'
-      };
-
-      const titleStyle = {
-         display: 'inline-block',
-         width: '100%',
-         margin: '0 20px 0 0',
-         lineHeight: '30px',
-         fontSize: 20,
-         fontWeight: '100',
-         color: 'white',
-         fontFamily: '"Lucida Console", Monaco, monospace'
-      };
-
       const Bars = [];
       for (i = 1; i <= 40; i++) {
          Bars.push(React.createElement(Bar, { key: i, id: i, level: this.state.level }));
@@ -11027,10 +10878,10 @@ const Skill = React.createClass({
 
       return React.createElement(
          'div',
-         { style: style },
+         { className: 'skill' },
          React.createElement(
             'span',
-            { style: titleStyle },
+            { className: 'skill-title' },
             this.props.title
          ),
          Bars

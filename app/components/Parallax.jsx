@@ -66,38 +66,17 @@ const ParallaxDiv = React.createClass( {
    render() {
 
       const style = {
-         width: '100%',
          height: this.props.height,
-         backgroundColor: 'black',
-         backgroundImage: 'url("' + this.props.path + '")',
-         backgroundPosition: '100% 50%',
-         backgroundSize: 'auto 100%',
-         backgroundRepeat: 'no-repeat',
-         backgroundAttachment: 'fixed',
-         color: 'white',
-         padding: '40px 0',
-         boxSizing: 'border-box'
-      };
-
-      const spanStyle = {
-         lineHeight: '30px',
-         fontSize: '28px',
-         width: '100%',
-         fontFamily: '"Lucida Console", Monaco, monospace',
-         fontWeight: 100,
-         textAlign: 'center',
-         display: 'inline-block',
-         marginTop: '50vh',
-         transform: 'translateY(-50%)'
+         backgroundImage: 'url("' + this.props.path + '")'
       };
 
       const title = (
-         <span style={ spanStyle } dangerouslySetInnerHTML={ { __html: this.state.content } } >
+         <span className="parallax-div-text" dangerouslySetInnerHTML={ { __html: this.state.content } } >
          </span>
       );
 
       return (
-         <div style={ style } >
+         <div className="parallax-div" style={ style } >
             { this.props.name === 'title' && title }
             { this.props.children }
          </div>
