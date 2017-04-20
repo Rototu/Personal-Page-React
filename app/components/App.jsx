@@ -6,15 +6,11 @@ const ParallaxDiv = require( './Parallax.jsx' ); // Parallax Divs
 const BoxesDiv = require( './Boxes.jsx' ); // Image Boxes with description
 const Skill = require( './Skill.jsx' ); // Skill Counter Div
 const AchievmentGallery = require( './Gallery.jsx' ); // Gallery for Achievments
+const Contact = require( './Contact.jsx' );
 
 const title = `EMANUEL FARAUANU <br/> Programmer & Volunteer`;
 
 const App = React.createClass( {
-
-   componentDidMount() {
-      window.scrollTo( 0, 0 );
-      this._div.scrollTop = 0;
-   },
 
    render() {
 
@@ -30,7 +26,7 @@ const App = React.createClass( {
             <Nav />
             <ParallaxDiv name='title' path='img/me.png' title={ title } height='100vh' />
             <BoxesDiv name='page1' height='500px' />
-            <ParallaxDiv name='page2' path='img/code.png' title="Example" height='420px' >
+            <ParallaxDiv name='page2' path='img/code.png' title="Skills" height='420px' >
                <Skill title='Photography' level={ 22 } />
                <Skill title='JavaScript' level={ 30 } />
                <Skill title='Friendliness' level={ 34 } />
@@ -49,6 +45,9 @@ const App = React.createClass( {
                <Skill title='Image Editing' level={ 28 } />
             </ParallaxDiv>
             <AchievmentGallery />
+            <ParallaxDiv name="page3" path='img/contact.png' title="Contact" height='400px' >
+               <Contact />
+            </ParallaxDiv>
          </div>
       );
    }

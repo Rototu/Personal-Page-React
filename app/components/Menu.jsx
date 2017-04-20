@@ -22,6 +22,45 @@ const NavButton = React.createClass( {
       } );
    },
 
+   clickHandler( e ) {
+
+      const h = window.innerHeight;
+      const scrollPositions = [ 0, h, h+500, h+920, h+1320 ];
+      const scrollToPos = scrollPositions[ this.props.id ];
+      const totalScrollValue = Math.abs( window.scrollY - scrollToPos );
+
+      const animateScrollStep = ( timestamp ) => {
+
+         const currScrollPos = window.scrollY;
+         const scrollValue = Math.abs( currScrollPos - scrollToPos );
+         const coefficient = Math.abs( 1 - 2 * scrollValue / totalScrollValue );
+         const scrollCoefficient = Math.min( 0.9, coefficient );
+         const scrollAcceleration = Math.cos( scrollCoefficient * Math.PI / 2 );
+         const scrollAmount = 30 * scrollAcceleration;
+
+         console.log(scrollCoefficient);
+
+         if( scrollValue >= 15 ) {
+
+            if( currScrollPos > scrollToPos ) {
+               window.scrollTo( 0, currScrollPos - scrollAmount );
+            } else {
+               window.scrollTo( 0, currScrollPos + scrollAmount );
+            }
+            window.requestAnimationFrame( animateScrollStep );
+
+         } else {
+
+            window.scrollTo( 0, scrollToPos );
+
+         }
+
+      };
+
+      window.requestAnimationFrame( animateScrollStep );
+
+   },
+
    render() {
 
       const style = {
@@ -39,8 +78,13 @@ const NavButton = React.createClass( {
       };
 
       return (
-         <div onMouseEnter={ this.mouseEnterHandler } onMouseLeave={ this.mouseLeaveHandler } style={ style } >
+         <div onClick={ this.clickHandler }
+            onMouseEnter={ this.mouseEnterHandler }
+            onMouseLeave={ this.mouseLeaveHandler }
+            style={ style } >
+
             { this.props.name }
+
          </div>
       );
 
@@ -110,11 +154,11 @@ const Nav = React.createClass( {
 
       return (
          <div style={ style } >
-            <NavButton name='Home' hColor={ this.state.highlightColor } />
-            <NavButton name='About Me' hColor={ this.state.highlightColor } />
-            <NavButton name='Skills' hColor={ this.state.highlightColor } />
-            <NavButton name='Achievments' hColor={ this.state.highlightColor } />
-            <NavButton name='Contact' hColor={ this.state.highlightColor } />
+            <NavButton id={ 0 } name='Home' hColor={ this.state.highlightColor } />
+            <NavButton id={ 1 } name='About Me' hColor={ this.state.highlightColor } />
+            <NavButton id={ 2 } name='Skills' hColor={ this.state.highlightColor } />
+            <NavButton id={ 3 } name='Achievments' hColor={ this.state.highlightColor } />
+            <NavButton id={ 4 } name='Contact' hColor={ this.state.highlightColor } />
          </div>
       );
 

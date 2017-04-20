@@ -12,7 +12,7 @@ const achievmentDetails = [
       title: `Studying Computer Science and Phylosophy at St Anne's College, Oxford`,
       path: 'img/anne.jpg'
    }, {
-      title: 'Second place at the "Creatori de viitor" entrepreneurship contest in 2016',
+      title: 'Second place at the "Creatori de viitor" entrepreneurship team contest in 2016',
       path: 'img/ano.jpg'
    }, {
       title: 'Member of the team behind "Fabrica de Experimente"',
@@ -40,8 +40,6 @@ const Button = React.createClass( {
          display: 'inline-block',
          cursor: 'pointer'
       }
-
-      console.log(this.props.id, this.props.displayId);
 
       if( this.props.id === this.props.displayId ) {
          style.backgroundColor = 'white';

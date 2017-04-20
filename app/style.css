@@ -1,0 +1,11 @@
+body {
+   margin: 0;
+}
+
+/*App.jsx*/
+
+.app {
+   margin: 0;
+   width: '100%';
+   fontFamily: '"Lucida Console", Monaco, monospace''
+}
