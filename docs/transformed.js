@@ -10872,7 +10872,7 @@ const Skill = React.createClass({
    render() {
 
       const Bars = [];
-      for (i = 1; i <= 40; i+FR+) {
+      for (i = 1; i <= 40; i++) {
          Bars.push(React.createElement(Bar, { key: i, id: i, level: this.state.level }));
       }
 
