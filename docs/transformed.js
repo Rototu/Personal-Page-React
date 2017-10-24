@@ -10079,20 +10079,20 @@ const App = React.createClass({
             ParallaxDiv,
             { name: 'page2', path: 'img/code.png', title: 'Skills', height: this.state.skillsHeight },
             React.createElement(Skill, { title: 'Photography', level: 22 }),
-            React.createElement(Skill, { title: 'JavaScript', level: 30 }),
+            React.createElement(Skill, { title: 'JavaScript', level: 28 }),
             React.createElement(Skill, { title: 'Friendliness', level: 34 }),
             React.createElement(Skill, { title: 'Mathematics', level: 20 }),
-            React.createElement(Skill, { title: 'C++', level: 14 }),
-            React.createElement(Skill, { title: 'Leadership', level: 28 }),
-            React.createElement(Skill, { title: 'Physics', level: 24 }),
+            React.createElement(Skill, { title: 'C++', level: 10 }),
+            React.createElement(Skill, { title: 'Leadership', level: 25 }),
+            React.createElement(Skill, { title: 'Physics', level: 20 }),
             React.createElement(Skill, { title: 'English', level: 30 }),
-            React.createElement(Skill, { title: 'German', level: 21 }),
-            React.createElement(Skill, { title: 'Romanian', level: 36 }),
-            React.createElement(Skill, { title: 'Sports', level: 14 }),
+            React.createElement(Skill, { title: 'German', level: 18 }),
+            React.createElement(Skill, { title: 'Romanian', level: 38 }),
+            React.createElement(Skill, { title: 'Sports', level: 10 }),
             React.createElement(Skill, { title: 'Node JS', level: 18 }),
-            React.createElement(Skill, { title: 'React JS', level: 12 }),
+            React.createElement(Skill, { title: 'React JS', level: 20 }),
             React.createElement(Skill, { title: 'Web Design', level: 24 }),
-            React.createElement(Skill, { title: 'Video Editing', level: 22 }),
+            React.createElement(Skill, { title: 'Video Editing', level: 21 }),
             React.createElement(Skill, { title: 'Image Editing', level: 28 })
          ),
          React.createElement(AchievmentGallery, null),
@@ -10872,7 +10872,7 @@ const Skill = React.createClass({
    render() {
 
       const Bars = [];
-      for (i = 1; i <= 40; i++) {
+      for (i = 1; i <= 40; i+FR+) {
          Bars.push(React.createElement(Bar, { key: i, id: i, level: this.state.level }));
       }
 
