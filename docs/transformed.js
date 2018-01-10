@@ -9997,7 +9997,7 @@ const Skill = __webpack_require__(89); // Skill Counter Div
 const AchievmentGallery = __webpack_require__(85); // Gallery for Achievments
 const Contact = __webpack_require__(84);
 
-const title = `EMANUEL FARAUANU <br/> Programmer & Volunteer`;
+const title = `EMANUEL FARAUANU <br/> Computer Science Enthusiast`;
 let resizeTimeout;
 
 const App = React.createClass({
