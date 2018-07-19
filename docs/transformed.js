@@ -10093,6 +10093,10 @@ const App = React.createClass({
             React.createElement(Skill, { title: 'React JS', level: 20 }),
             React.createElement(Skill, { title: 'Web Design', level: 24 }),
             React.createElement(Skill, { title: 'Video Editing', level: 21 }),
+            React.createElement(Skill, { title: 'Scala', level: 21 }),
+            React.createElement(Skill, { title: 'Haskell', level: 23 }),
+            React.createElement(Skill, { title: 'Philosophy', level: 19 }),
+            React.createElement(Skill, { title: 'Music Arrangement', level: 24 }),
             React.createElement(Skill, { title: 'Image Editing', level: 28 })
          ),
          React.createElement(AchievmentGallery, null),
